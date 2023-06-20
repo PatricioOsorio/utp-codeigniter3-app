@@ -1,3 +1,4 @@
+- index.php/products/listcategories
 ###################
 What is CodeIgniter
 ###################
