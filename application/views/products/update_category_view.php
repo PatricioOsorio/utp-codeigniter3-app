@@ -8,12 +8,12 @@
 </head>
 
 <body>
-  <form action="insertNewCategorie" method="post">
+  <form action="insertNewCategory" method="post">
     <label for="categoria">Categoria</label>
-    <input type="text" name="categoria" id="categoria">
+    <input type="text" name="categoria" id="categoria" value="<?= $categorie->nombre ?>">
 
     <label for="status">status</label>
-    <input type="number" name="status" id="status" min="0" max="1">
+    <input type="number" name="status" id="status" min="0" max="1" value="<?= $categorie->activo ?>">
 
     <button type="submit">Enviar</button>
   </form>

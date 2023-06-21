@@ -8,12 +8,13 @@
 </head>
 
 <body>
-  <table>
+  <table border="1">
     <thead>
       <tr>
-        <th>Numero</th>
+        <th>Id</th>
         <th>Categoria</th>
         <th>Status</th>
+        <th>Opciones</th>
       </tr>
     </thead>
     <tbody>
@@ -22,13 +23,14 @@
         $counter = 0;
         foreach ($categories->result() as $categorie) {
       ?>
-          <script>
-            console.log(<?php $categorie ?>)
-          </script>
           <tr>
-            <td><?= ++$counter ?></td>
+            <td><?= $categorie->id_categoria ?></td>
             <td><?= $categorie->nombre ?></td>
-            <td><?= $categorie->activo ?></td>
+            <td><?= $categorie->activo == 1 ? 'Activo' : 'Inactivo' ?></td>
+            <td>
+              <a href="<?= base_url('index.php/update_category/' . $categorie->id_categoria)  ?>">Actualizar</a>
+              <a href="<?= base_url('index.php/delete_category/' . $categorie->id_categoria)  ?>">Eliminar</a>
+            </td>
           </tr>
       <?php
         }

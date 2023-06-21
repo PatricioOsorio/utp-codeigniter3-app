@@ -7,7 +7,7 @@ class Products extends CI_Controller
   {
     parent::__construct();
     $this->load->model('MyModel');
-    // $this->load->helper('redirect');
+    $this->load->helper('url');
   }
 
   public function welcome()
@@ -24,12 +24,12 @@ class Products extends CI_Controller
     $this->load->view('products/categories_view', $data);
   }
 
-  public function insertCategorie()
+  public function insertCategory()
   {
-    $this->load->view('products/insert_categorie_view');
+    $this->load->view('products/insert_category_view');
   }
 
-  public function insertNewCategorie()
+  public function insertNewCategory()
   {
     $values = array(
       "nombre" => $this->input->post('categoria'),
@@ -37,7 +37,27 @@ class Products extends CI_Controller
       "activo" => $this->input->post('status'),
     );
 
-    $this->MyModel->addCategorie($values);
+    $this->MyModel->addCategory($values);
   }
 
+  public function deleteCategory()
+  {
+    $id = $this->uri->segment(2);
+    $this->MyModel->lessCategory($id);
+    redirect(base_url('index.php/products/listCategories'));
+  }
+
+  public function updateCategory()
+  {
+    $id = $this->uri->segment(2);
+    $categories = $this->MyModel->getCategories($id);
+
+    $categorie = ($categories != false) ? $categories->row(0) : false;
+
+    $data = array(
+      'categorie' => $categorie
+    );
+
+    $this->load->view('products/update_category_view', $data);
+  }
 }

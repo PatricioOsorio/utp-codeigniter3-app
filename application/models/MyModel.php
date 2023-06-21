@@ -8,16 +8,31 @@ class MyModel extends CI_Model
     $this->load->database();
   }
 
-  public function getCategories()
+  public function getCategories($id = false)
   {
+    if ($id != false) {
+      $this->db->where('id_categoria', $id);
+    }
+
     $result = $this->db->get('categoria');
 
-    if ($result->num_rows() > 0) return $result;
-    else return false;
+    return ($result->num_rows() > 0) ? $result : false;
   }
 
-  public function addCategorie($values) 
+  public function addCategory($values)
   {
     $this->db->insert('categoria', $values);
+  }
+
+  public function lessCategory($id)
+  {
+    $this->db->where('id_categoria', $id);
+    $this->db->delete('categoria');
+  }
+
+  public function updateCategory($id, $data)
+  {
+    $this->db->where('id_categoria', $id);
+    $this->db->update('categoria', $data);
   }
 }
